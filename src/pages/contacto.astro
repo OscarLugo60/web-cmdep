@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import InstagramIcon from '../icons/InstagramIcon.astro';
+import TelefonoIcon from '../icons/TelefonoIcon.astro';
+---
+<Layout title="Contactos Centro Médico Docente el Paso">
+    <div class="flex flex-col items-center justify-center mt-4">
+        <h1 class="text-5xl text-[#025940] font-bold" style="font-family:'Corinthia', cursive;">Contactos</h1>
+        <section class="flex flex-wrap items-center justify-center gap-5 mt-4">
+            <div class="flex flex-col gap-5 p-5 justify-center items-center border rounded-xl hover:bg-slate-100 transition shadow-xl">
+                <h3 class="text-[#025940] font-bold text-xl">Dirección</h3>
+                <iframe class="w-72 md:w-[400px] md:h-[300px]" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d62798.47377819875!2d-67.049894!3d10.349512!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a8c577a3546bf%3A0xaba27b5651cfffb4!2sCentro%20Medico%20Docente%20El%20Paso!5e0!3m2!1ses!2sve!4v1710264979362!5m2!1ses!2sve" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="grid grid-cols-1 gap-5">
+                <span class="flex justify-center items-center gap-2 text-xl font-bold border rounded-xl text-[#025940] py-5 px-6 shadow-xl cursor-pointer hover:bg-slate-100 transition w-72 md:w-96">
+                    <TelefonoIcon class="size-16" />
+                    0212-700-50-00
+                </span>
+                <span class="flex justify-center items-center gap-2 sm:text-lg md:text-xl font-bold border rounded-xl text-[#025940] py-5 px-6 shadow-xl cursor-pointer hover:bg-slate-100 transition w-72 md:w-96">
+                    <InstagramIcon class="size-16" />
+                    @CentroMedicoDocenteElPaso
+                </span>
+                <div class="flex flex-col p-5 justify-center items-center gap-5 border rounded-xl shadow-xl w-72 md:w-96 hover:bg-slate-100 transition">
+                    <img class="w-24" src="/img/Logo.webp" alt="Logo Centro Médico Docente el Paso">
+                    <p class="text-center text-[#025940]">No dude en contactar con nosotros en cualquier momento, nuestro equipo de trabajo estará encantado de atenderlo y ayudarlo en cualquier situación.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</Layout>

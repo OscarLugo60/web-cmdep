@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Volver from '../icons/VolverIcon.astro';
+---
+<Layout title="404 Not Found">
+    <section class="flex flex-col items-center justify-center py-10 gap-y-10">
+        <h1 class="text-9xl text-[#025940] font-bold">404</h1>
+        <h1 class="text-4xl text-[#025940] font-bold">La dirección a la que intenta acceder no existe</h1>
+        <Button href="/">
+            Volver al inicio
+            <Volver />
+        </Button>
+    </section>
+</Layout>

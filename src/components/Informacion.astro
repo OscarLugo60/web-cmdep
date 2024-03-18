@@ -1,0 +1,36 @@
+---
+import Card from './Card.astro';
+import ClinicaIcon from '../icons/ClinicaIcon.astro';
+import AtencionIcon from '../icons/AtencionIcon.astro';
+import MedicosIcon from '../icons/MedicosIcon.astro';
+import ServicioIcon from '../icons/ServicioIcon.astro';
+import Button from './Button.astro';
+import FlechaIcon from '../icons/FlechaIcon.astro';
+---
+
+<section class="min-h-screen flex py-12 gap-y-14 md:gap-y-14 md:gap-x-20 px-5 flex-wrap items-center justify-center md:bg-[url('/img/background.webp')] bg-cover bg-no-repeat bg-center bg-fixed shadow-inner">
+    <Card>
+        <ClinicaIcon class="text-[#025940] size-20 -mt-16" />
+        <p class="text-center text-xs text-white text-wrap">Somos un centro sanitario privador que abrió sus puertas a partir del año 2000. Estamos siempre a la orden para atender a cualquier persona que solicite nuestros servicios.</p>
+    </Card>
+    <Card>
+        <AtencionIcon class="text-[#025940] size-20 -mt-16" />
+        <p class="text-center text-xs text-white text-wrap">Nuestro personal se encuentra atento para atenderlo de la mejor manera, deseando que su estancia en nuestras instalaciones sea lo más cómoda y corta posible.</p>
+    </Card>
+    <Card>
+        <MedicosIcon class="text-[#025940] size-20 -mt-16" />
+        <p class="text-center text-xs text-white text-wrap">Contamos con excelentes profesionales en todas las especialidades.</p>
+        <Button href="/directorio" style="margin-bottom: -45px">
+            Ver médicos
+            <FlechaIcon />
+        </Button>
+    </Card>
+    <Card>
+        <ServicioIcon class="text-[#025940] size-20 -mt-16" />
+        <p class="text-center text-xs text-white text-wrap">Ofrecemos una variedad de servicios para toda nuestra clientela con el objetivo de brindarle  confortabilidad y todo lo necesario para un correcto cuidado de su salud.</p>
+        <Button href="/servicios" style="margin-bottom: -45px">
+            Ver servicios
+            <FlechaIcon />
+        </Button>
+    </Card>
+</section>

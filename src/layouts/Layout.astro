@@ -1,0 +1,38 @@
+---
+import "@fontsource/audiowide"
+import '@fontsource-variable/onest'
+import '@fontsource/corinthia'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Página web de Centro Medico Docente el Paso, La Mejor Clínica de los Altos Mirandinos" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/img/Logo.webp" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-white">
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+		<script src="../../node_modules/flowbite/dist/flowbite.min.js"></script>
+	</body>
+</html>
+<style is:global>
+	html {
+		font-family: 'Onest Variable', system-ui, sans-serif;
+		background-size: 224px;
+	}
+</style>

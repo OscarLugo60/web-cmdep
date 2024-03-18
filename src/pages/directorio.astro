@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BusquedaIcon from '../icons/BusquedaIcon.astro';
+import BotiquinIcon from '../icons/BotiquinIcon.astro';
+import Doctores from '../components/Doctores.astro';
+---
+
+<Layout title="Centro Médico Docente el Paso">
+    <section class="flex flex-col items-center justify-center gap-4 mt-4">
+        <h1 class="text-5xl text-[#025940] font-bold" style="font-family:'Corinthia', cursive;">Equipo Médico</h1>
+        <form class="flex flex-wrap items-center justify-center gap-4">
+            <div class="flex items-center">
+                <span class="bg-gray-50 border border-gray-300 text-gray-900 rounded-l-lg p-2">
+                    <BusquedaIcon />
+                </span>
+                <input type="text" name="buscar" id="buscar" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-[#038C3E] focus:border-[#038C3E] block w-full p-2.5" placeholder="Buscar">
+            </div>
+            <div class="flex items-center">
+                <span class="bg-gray-50 border border-gray-300 text-gray-900 rounded-l-lg p-2">
+                    <BotiquinIcon />
+                </span>
+                <select id="especialidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-[#038C3E] focus:border-[#038C3E] block p-2.5">
+
+                    <option value="">Especialidades</option>
+                </select>
+            </div>
+        </form>
+    </section>
+    <Doctores />
+</Layout>

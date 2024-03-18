@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import PdfIcon from '../icons/PdfIcon.astro';
+import DownloadIcon from '../icons/DownloadIcon.astro';
+---
+
+<Layout title="Centro Médico Docente el Paso">
+    <section class="flex flex-col items-center justify-center gap-14 mt-4 px-5">
+        <h1 class="text-5xl text-[#025940] font-bold" style="font-family:'Corinthia', cursive;">Quiénes Somos</h1>
+        <section class="flex flex-wrap items-center justify-evenly gap-5 w-full">
+            <div class="text-center text-[#025940] flex flex-col gap-5 items-center justify-center md:w-2/5">
+                <p class="w-11/12 text-pretty">
+                    Somos una institución que ha prestado servicios médicos especializados por más de 20 años en los Altos Mirandinos.
+                </p>
+                <p class="w-11/12 text-pretty">
+                    Ofrecemos servicios de alta calidad y confort. Nuestro objetivo principal es ofrecer servicios médicos a la población de Los Teques, Carrizal, San Antonio y todas las áreas adyacentes.
+                </p>
+                <p class="font-bold w-11/12 text-pretty">
+                    “En el Centro Médico Docente el Paso su salud es nuestra responsabilidad”
+                </p>
+            </div>
+            <span class="h-80 border border-[#e2e2e2] hidden md:block"></span>
+            <div class="flex items-center justify-center md:w-2/5">
+                <img class="w-1/2" src="/img/Logo.webp" alt="Logo Centro Médico Docente el Paso">
+            </div>
+        </section>
+        <section class="flex flex-wrap items-center justify-center px-5 gap-5 text-center">
+            
+            <article class="block max-w-sm p-6 bg-[#025940] border border-gray-200 rounded-lg shadow">
+
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Misión</h5>
+                <p class="font-normal text-white text-pretty">Centro Médico el Paso es una empresa de Servicio de Salud ubicada en los Altos Mirandinos con atención inmediata las 24 horas en las áreas de hospitalización, cirugía y consulta. Con personal altamente calificado, empatía, vocación, profesionalismo enfocado en la mejora continua. Posee una infraestructura y equipos modernos y los operacionaliza con procesos y métodos vanguardistas globales.</p>
+            </article>
+            <article class="block max-w-sm p-6 bg-[#025940] border border-gray-200 rounded-lg shadow">
+
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Visión</h5>
+                <p class="font-normal text-white text-pretty">Centro Médico el Paso desea mantenerse como la mejor Clínica Tipo A de los Altos Mirandinos, ofreciendo una relación respetable "Costo, beneficio, valor"; con presencia y visibilidad en las redes sociales y otras plataformas virtuales profesionales, consideran atender eficaz y eficientemente a todas las partes interesadas del servicio.</p>
+            </article>
+        </section>
+        <span class="font-bold text-center flex flex-col items-center justify-center gap-y-3">
+            Puedes saber más de nosotros descargando nuestro Dossier:
+            <Button href="/pdf/Dossier.pdf" target="_blank" noreferrer>
+                <PdfIcon class="size-6" />
+                Descargar Dossier
+                <DownloadIcon />
+            </Button>
+        </span>
+        
+    </section>
+</Layout>

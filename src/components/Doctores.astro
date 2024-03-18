@@ -1,0 +1,202 @@
+    <section id="especialidades" class="flex flex-col items-center justify-center mx-5">
+        <div id="loader" class="mt-10" role="status">
+            <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-500" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+            </svg>
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div id="doctores" class="w-full flex flex-wrap items-center justify-center gap-5">
+            
+        </div>
+    </section>
+    
+<script>
+
+    // Definir las variables
+    const API_URL = "https://backend.centromedicodocenteelpaso.com/medicos/";
+    const API_ESPECIALIDAD_URL = "https://backend.centromedicodocenteelpaso.com/especialidades/";
+    const SPECIALTY = "";
+    const elementoListaEspecialidad = document.getElementById("especialidades");
+    const elementoListaSelect = document.getElementById("especialidad");
+    const DEFAULT_DOCTOR_PHOTO_URL = "/img/user.webp";
+    const loader = document.getElementById("loader");
+    const buscar = document.getElementById("buscar") as HTMLInputElement;
+    const especialidad = document.getElementById("especialidad") as HTMLSelectElement;
+
+    loader.classList.remove("hidden");
+    
+
+    function crearElementoEspecialidad(especialidad) {
+        const elementoEspecialidad = document.createElement("section");
+        elementoEspecialidad.classList.add("flex", "flex-col", "items-center", "justify-center", "mx-5");
+        elementoEspecialidad.innerHTML = `<h2 class="text-[#025940] font-bold text-2xl my-7">${especialidad.nombre}</h2>
+        <div id="especialidad-${especialidad.id}-doctores" class="flex flex-wrap items-center justify-center gap-5"></div>`;
+        return elementoEspecialidad;
+    }
+
+    function crearElementoDoctor(doctor) {
+        const elementoDoctor = document.createElement("article");
+
+        // Definir la URL de la imagen
+        var foto = "/img/user.webp";
+        if(doctor.foto !== null) {
+            var foto = `https://backend.centromedicodocenteelpaso.com${doctor.foto}`;
+        }
+        else {
+            var foto = DEFAULT_DOCTOR_PHOTO_URL;
+        }
+
+        // Iterar telefonos
+        const telefonos = doctor.numeros_contacto;
+
+        elementoDoctor.classList.add("w-full", "max-w-sm", "bg-white", "border", "border-gray-200", "rounded-lg", "shadow", "p-5", "hover:bg-slate-100", "transition");
+        elementoDoctor.innerHTML = `
+        <div class="flex gap-5 items-center cursor-pointer">
+            <div class="flex-shrink-0">
+                <img class="w-24 h-24 scale-1/1 mb-3 rounded-full shadow-lg" src="${foto}" alt="${doctor.nombre} ${doctor.apellido}"/>
+            </div>
+            <div class="flex flex-col gap-2">
+                <h5 class="mb-1 text-xl font-bold font-medium text-gray-900 dark:text-white">
+                    ${doctor.nombre} ${doctor.apellido}
+                </h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400">
+                    <b>Ubicación:</b> ${doctor.ubicacion_consultorio}
+                </span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">
+                    <b>Horarios:</b> ${doctor.horarios}
+                </span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">
+                    <div class="flex flex-col h-10">
+                        <b>Contacto:</b>
+                        ${telefonos.map(telefono => `<span class="ml-5"> ${telefono.numero} </span>`).join('')}
+                    </div>
+                </span>
+            </div>
+        </div>`;
+        return elementoDoctor;
+    }
+
+    function crearElementoSelect(especialidades) {
+        const elementoSelect = document.createElement("option");
+        elementoSelect.value = `${especialidades.id}`;
+        elementoSelect.text = `${especialidades.nombre}`;
+        return elementoSelect;
+    }
+
+    function funcionConsulta() {
+        const seleccion = especialidad.value;
+        var busqueda = buscar.value.toLowerCase();
+        
+        loader.classList.remove("hidden");
+        setTimeout(function(){
+            elementoListaEspecialidad.innerHTML = "";
+            fetch(`${API_URL}?nombre=${busqueda}&especialidad_id=${seleccion}`)
+            .then((response) => response.json())
+            .then((data) => {
+                // Procesar la respuesta
+                const especialidades = data;
+                let doctores = [];
+
+                loader.classList.add("hidden");
+
+                // Iterar sobre las especialidades
+                especialidades.forEach((especialidad) => {
+                    if (especialidad.medicos.length > 0) {
+                        const elementoEspecialidad = crearElementoEspecialidad(especialidad);
+                        elementoListaEspecialidad.appendChild(elementoEspecialidad);
+
+                        doctores = especialidad.medicos;
+                    
+                        doctores.forEach((doctor) => {
+                            const elementoDoctor = crearElementoDoctor(doctor);
+                            const elementoListaDoctor = document.getElementById(`especialidad-${especialidad.id}-doctores`);
+                            elementoListaDoctor.appendChild(elementoDoctor);
+                        });
+                    }
+                });
+            });
+        }, 500);
+    }
+
+    especialidad.addEventListener("change", () => {
+        funcionConsulta();
+    })
+    // Realizar la solicitud a la API
+    fetch(`${API_URL}`)
+    .then((response) => response.json())
+    .then((data) => {
+        // Procesar la respuesta
+        const especialidades = data;
+        let doctores = [];
+
+        loader.classList.add("hidden");
+
+        // Iterar sobre las especialidades
+        especialidades.forEach((especialidad) => {
+            if (especialidad.medicos.length > 0) {
+                const elementoEspecialidad = crearElementoEspecialidad(especialidad);
+                elementoListaEspecialidad.appendChild(elementoEspecialidad);
+
+                doctores = especialidad.medicos;
+            
+                doctores.forEach((doctor) => {
+                    const elementoDoctor = crearElementoDoctor(doctor);
+                    const elementoListaDoctor = document.getElementById(`especialidad-${especialidad.id}-doctores`);
+                    elementoListaDoctor.appendChild(elementoDoctor);
+                });
+            }
+        });
+    });
+
+    fetch(`${API_ESPECIALIDAD_URL}`)
+    .then((response) => response.json())
+    .then((data) => {
+        // Procesar la respuesta
+        const lista = data;
+        lista.forEach((item) => {
+            const elementoSelect = crearElementoSelect(item);
+            elementoListaSelect.appendChild(elementoSelect);
+        });
+    });
+
+    let timeout;
+    buscar.addEventListener("input", (event) => {
+        loader.classList.remove("hidden");
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+            const seleccion = especialidad.value;
+            var busqueda = buscar.value.toLowerCase();
+            elementoListaEspecialidad.innerHTML = "";
+
+            fetch(`${API_URL}?nombre=${busqueda}&especialidad_id=${seleccion}`)
+            .then((response) => response.json())
+            .then((data) => {
+                // Procesar la respuesta
+                const especialidades = data;
+                let doctores = [];
+
+                loader.classList.add("hidden");
+
+                // Iterar sobre las especialidades
+                especialidades.forEach((especialidad) => {
+                    if (especialidad.medicos.length > 0) {
+                        const elementoEspecialidad = crearElementoEspecialidad(especialidad);
+                        elementoListaEspecialidad.appendChild(elementoEspecialidad);
+
+                        doctores = especialidad.medicos;
+                    
+                        doctores.forEach((doctor) => {
+                            const elementoDoctor = crearElementoDoctor(doctor);
+                            const elementoListaDoctor = document.getElementById(`especialidad-${especialidad.id}-doctores`);
+                            elementoListaDoctor.appendChild(elementoDoctor);
+                        });
+                    }
+                });
+            });
+        }, 500);
+    });
+
+</script>
